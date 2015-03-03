@@ -22,6 +22,7 @@ public class REALFLASH extends Activity {
         tabHost.addTab(tabSpec);
         tabSpec = tabHost.newTabSpec("store");
         tabSpec.setContent(R.id.tabContacts);
+
         tabSpec.setIndicator("store");
         tabHost.addTab(tabSpec);
     }
