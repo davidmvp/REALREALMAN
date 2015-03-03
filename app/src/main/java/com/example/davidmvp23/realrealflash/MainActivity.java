@@ -85,7 +85,7 @@ public class MainActivity extends Activity {
         randomizeCheckBox = (CheckBox) findViewById(R.id.randomizeCheckBox);
         Button startButton = (Button) findViewById(R.id.startButton);
 
-        //TODO: Pull subjects from database and populate spinner
+        //TODO: Populate spinner here (need to pull subjects from database)
 
 
         //TODO: Do we need this? Same as below- check the listener
@@ -110,7 +110,7 @@ public class MainActivity extends Activity {
         addSubjectButton.setOnClickListener(insertTabListeners);
         insertButton.setOnClickListener(insertTabListeners);
 
-        //TODO: Load subjects from database and populate spinner
+        //TODO: Populate spinner from the database
 
 
     }
