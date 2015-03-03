@@ -1,0 +1,178 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    tools:context=".REALFLASH"
+    >
+
+    <TabHost
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/tabHost"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical"
+            android:background="#ffffff">
+
+            <TabWidget
+                android:id="@android:id/tabs"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"></TabWidget>
+
+            <FrameLayout
+                android:id="@android:id/tabcontent"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+
+                <LinearLayout
+                    android:id="@+id/reviewLayout"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:weightSum="1">
+
+                        <FrameLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="0dip"
+                            android:layout_weight="0.1"></FrameLayout>
+
+                        <Spinner
+                            android:layout_width="wrap_content"
+                            android:layout_height="0dip"
+                            android:id="@+id/subjectSpinner"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_weight="0.2" />
+
+                        <FrameLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="0dip"
+                            android:layout_weight="0.1"></FrameLayout>
+
+                        <CheckBox
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Randomize"
+                            android:id="@+id/randomizeCheckBox"
+                            android:layout_gravity="center_horizontal"
+                            android:textColor="#000000"
+                            android:textSize="40sp"
+                            android:textStyle="bold|italic"
+                            android:layout_weight="0.2" />
+
+                        <FrameLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="0dip"
+                            android:layout_weight="0.1"></FrameLayout>
+
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="  Start  "
+                            android:id="@+id/startButton"
+                            android:layout_gravity="center_horizontal"
+                            android:textColor="#000000"
+                            android:textStyle="bold"
+                            android:textSize="50sp"
+                            android:layout_weight="0.2" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/insertLayout"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:weightSum="1">
+
+                        <FrameLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="0dip"
+                            android:layout_weight=".1"></FrameLayout>
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="fill_parent"
+                            android:layout_height="0dip"
+                            android:weightSum="1"
+                            android:layout_weight=".15">
+
+                            <FrameLayout
+                                android:layout_width="0dip"
+                                android:layout_height="fill_parent"
+                                android:layout_weight=".1"></FrameLayout>
+
+                            <Spinner
+                                android:layout_width="0dip"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/insertSubjectSpinner"
+                                android:layout_weight="0.5" />
+
+                            <Button
+                                android:layout_width="0dip"
+                                android:layout_height="wrap_content"
+                                android:text="+"
+                                android:id="@+id/addSubjectButton"
+                                android:layout_weight="0.3" />
+
+                            <FrameLayout
+                                android:layout_width="0dip"
+                                android:layout_height="fill_parent"
+                                android:layout_weight=".1"></FrameLayout>
+                        </LinearLayout>
+
+                        <FrameLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="0dip"
+                            android:layout_weight="0.05"></FrameLayout>
+
+                        <EditText
+                            android:layout_width="fill_parent"
+                            android:layout_height="0dip"
+                            android:id="@+id/questionEditText"
+                            android:layout_weight=".2"
+                            android:hint="Question"
+                            android:gravity="center" />
+
+                        <FrameLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="0dip"
+                            android:layout_weight="0.05"></FrameLayout>
+
+                        <EditText
+                            android:layout_width="fill_parent"
+                            android:layout_height="0dip"
+                            android:id="@+id/answerEditText"
+                            android:layout_weight=".2"
+                            android:hint="Answer"
+                            android:gravity="center" />
+
+                        <FrameLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="0dip"
+                            android:layout_weight="0.05"></FrameLayout>
+
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="0dip"
+                            android:text="   Insert   "
+                            android:id="@+id/insertButton"
+                            android:layout_weight=".2"
+                            android:layout_gravity="center" />
+                    </LinearLayout>
+                </LinearLayout>
+
+            </FrameLayout>
+        </LinearLayout>
+    </TabHost>
+</RelativeLayout>
