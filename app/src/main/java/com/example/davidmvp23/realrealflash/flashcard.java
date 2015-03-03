@@ -4,33 +4,21 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TabHost;
 
 
-public class REALFLASH extends Activity {
+public class flashcard extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_realflash);
-        TabHost tabHost = (TabHost) findViewById(R.id.tabHost);
-        tabHost.setup();
-        TabHost.TabSpec tabSpec =
-                tabHost.newTabSpec("creator");
-        tabSpec.setContent(R.id.CreateTab);
-        tabSpec.setIndicator("Creatrhdssd");
-        tabHost.addTab(tabSpec);
-        tabSpec = tabHost.newTabSpec("store");
-        tabSpec.setContent(R.id.tabContacts);
-        tabSpec.setIndicator("store");
-        tabHost.addTab(tabSpec);
+        setContentView(R.layout.activity_flashcard);
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_realflash, menu);
+        getMenuInflater().inflate(R.menu.menu_flashcard, menu);
         return true;
     }
 
