@@ -50,7 +50,7 @@ public class FlashCarddbAdapter {
     public boolean removeCourse(long ri) {
         return db.delete(Card_TABLE, Card_ID+"="+ri, null) > 0;
     }
-    public long insertCourse(Card card) {
+    public long insertCard(Card card) {
         // create a new row of values to insert
         ContentValues cvalues = new ContentValues();
         // assign values for each col
@@ -74,7 +74,7 @@ public class FlashCarddbAdapter {
         return result;
     }
 
-    public Cursor getAllCourses() {
+    public Cursor getAllCard() {
         return db.query(Card_TABLE, Card_COLS, null, null, null, null, null);
     }
     private static class FlashcardDBHelper extends SQLiteOpenHelper {
