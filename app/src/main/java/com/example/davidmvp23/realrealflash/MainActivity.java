@@ -5,25 +5,17 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.res.TypedArray;
-import android.database.Cursor;
 import android.os.Bundle;
-import android.preference.Preference;
-import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TabHost;
 import android.widget.Toast;
-
-import java.util.ArrayList;
 
 
 public class MainActivity extends Activity {
@@ -35,12 +27,6 @@ public class MainActivity extends Activity {
     //UI components for insert tab
     EditText questionEditText, answerEditText;
     Spinner insertSubjectSpinner;
-    protected static ArrayList<Card> allCards;
-    protected static TypedArray pointsRA;
-
-    private Context context;
-    protected static FlashCarddbAdapter dbAdapt;   // made static to access in CourseView - must be better way?
-    private static Cursor cCursor;  // course table cursor
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,37 +41,6 @@ public class MainActivity extends Activity {
 
         //Setup the UI for the insert tab
         setupInsertTab();
-
-        dbAdapt = new FlashCarddbAdapter(this);
-        dbAdapt.open();
-
-        dbAdapt.insertCard(new Card("Hello", "A+", "LOL"));
-        allCards = new ArrayList<Card>();
-        // make array adapter to bind arraylist to listview
-
-
-       // populateList();
-
-    }
-    public void populateList()
-    {
-        cCursor = dbAdapt.getAllCard();
-        updateArray();
-    }
-
-    public void updateArray()
-    {
-        //   	cCursor = dbAdapt.getAllCourses();
-
-        allCards.clear();
-
-        if (cCursor.moveToFirst())
-            do {
-                Card result = new Card(cCursor.getString(1), cCursor.getString(2), cCursor.getString(3));
-                allCards.add(0, result);
-
-            } while (cCursor.moveToNext());
-
     }
 
 
@@ -131,16 +86,7 @@ public class MainActivity extends Activity {
         Button startButton = (Button) findViewById(R.id.startButton);
 
         //TODO: Populate spinner here (need to pull subjects from database)
-        //DONE
-        SharedPreferences values = PreferenceManager.getDefaultSharedPreferences(context);
-        SharedPreferences.Editor editor = values.edit();
-        int n = values.getInt("number", 0);
-        String str = values.getString("Subject", "");
-        ArrayList<String> ar = new ArrayList<String>();
-        String[] parts = str.split("_");
-        for (int i = 0; i < n; i++) {
-            ar.add(parts[i]);
-        }
+
 
         //TODO: Do we need this? Same as below- check the listener
         /*
@@ -166,15 +112,7 @@ public class MainActivity extends Activity {
 
         //TODO: Populate spinner from the database
 
-        SharedPreferences values = PreferenceManager.getDefaultSharedPreferences(context);
-        SharedPreferences.Editor editor = values.edit();
-        int n = values.getInt("number", 0);
-        String str = values.getString("Subject", "");
-        ArrayList<String> ar = new ArrayList<String>();
-        String[] parts = str.split("_");
-        for (int i = 0; i < n; i++) {
-            ar.add(parts[i]);
-        }
+
     }
 
 
@@ -228,13 +166,7 @@ public class MainActivity extends Activity {
         mBuilder.setPositiveButton("Enter", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 String newSubject = subjectEditText.getText().toString();
-                SharedPreferences values = PreferenceManager.getDefaultSharedPreferences(context);
-                SharedPreferences.Editor editor = values.edit();
-                int n = values.getInt("number", 0) + 1;
-                String str = values.getString("Subject", "") + "_" + newSubject;
-                editor.putInt("number", n);
-                editor.putString("Subject", str);
-                editor.commit();
+
                 //TODO: Need to add new subject to the database
 
                 //TODO: Need to notify spinner adapter that the data set has changed / repopulate the spinner
@@ -266,8 +198,7 @@ public class MainActivity extends Activity {
             String subject = insertSubjectSpinner.getSelectedItem().toString();
 
             //TODO: bundle information into the database
-            Card c = new Card(subject, question, answer);
-            dbAdapt.insertCard(c);
+
             Toast.makeText(this, "The card has been added!", Toast.LENGTH_SHORT).show();
 
         }
