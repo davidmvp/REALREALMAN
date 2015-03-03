@@ -299,7 +299,9 @@ public class MainActivity extends Activity {
 
     private void reviewStartButton() {
 
-        Toast.makeText(this, "Number of cards is: " + cCursor.getCount(), Toast.LENGTH_SHORT).show();
+        System.out.println(cCursor.moveToNext());
+        System.out.println(cCursor.moveToNext());
+        System.out.println(cCursor.moveToNext());
         /*
         //TODO: If the spinner is empty, then we can not start the new activity, else we go ahead with it
 
