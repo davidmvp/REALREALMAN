@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -111,7 +112,7 @@ public class MainActivity extends Activity {
         randomizeCheckBox = (CheckBox) findViewById(R.id.randomizeCheckBox);
         Button startButton = (Button) findViewById(R.id.startButton);
 
-        //TODO: Populate spinner here (need to pull subjects from database)
+        //TODO: Populate spinner here (need to pull subjects from database) DONE
         SharedPreferences values = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor editor = values.edit();
         int num = values.getInt("number", 0);
@@ -121,6 +122,17 @@ public class MainActivity extends Activity {
         for (int i = 0 ; i < num; i++) {
             ar.add(parts[i]);
         }
+
+        //Populate the spinner with the arraylist from the shared preferences
+        String[] spinnerList = new String[ar.size()];
+        spinnerList = ar.toArray(spinnerList);
+        ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence> (this, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        for (int i=0; i < ar.size(); i++) {
+            adapter.add(spinnerList[i]);
+        }
+        subjectSpinner.setAdapter(adapter);
+
 
 
         //TODO: Do we need this? Same as below- check the listener
@@ -145,7 +157,7 @@ public class MainActivity extends Activity {
         addSubjectButton.setOnClickListener(insertTabListeners);
         insertButton.setOnClickListener(insertTabListeners);
 
-        //TODO: Populate spinner from the database
+        //TODO: Populate spinner from the database DONE
         SharedPreferences values = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor editor = values.edit();
         int num = values.getInt("number", 0);
@@ -155,6 +167,16 @@ public class MainActivity extends Activity {
         for (int i = 0 ; i < num; i++) {
             ar.add(parts[i]);
         }
+
+        //Populate the spinner with the arraylist from the shared preferences
+        String[] spinnerList = new String[ar.size()];
+        spinnerList = ar.toArray(spinnerList);
+        ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence> (this, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        for (int i=0; i < ar.size(); i++) {
+            adapter.add(spinnerList[i]);
+        }
+        insertSubjectSpinner.setAdapter(adapter);
 
     }
 
@@ -210,15 +232,40 @@ public class MainActivity extends Activity {
             public void onClick(DialogInterface dialog, int whichButton) {
                 String newSubject = subjectEditText.getText().toString();
 
-                //TODO: Need to add new subject to the database
+                //TODO: Need to add new subject to the database DONE
                 SharedPreferences values = PreferenceManager.getDefaultSharedPreferences(context);
                 SharedPreferences.Editor editor = values.edit();
                 int num = values.getInt("number", 0) + 1;
-                String str = values.getString("subject", "") + "_" + newSubject;
+                String str;
+                if (num==1)
+                    str = newSubject;
+                else
+                    str = values.getString("subject", "") + "_" + newSubject;
                 editor.putInt("number", num);
                 editor.putString("subject", str);
                 editor.commit();
                 //TODO: Need to notify spinner adapter that the data set has changed / repopulate the spinner
+
+
+                //TODO: Populate spinner from the database DONE
+                num = values.getInt("number", 0);
+                str = values.getString("subject", "");
+                String[] parts = str.split("_");
+                ArrayList<String> ar = new ArrayList<String>();
+                for (int i = 0 ; i < num; i++) {
+                    ar.add(parts[i]);
+                }
+                //Populate the spinner with the arraylist from the shared preferences
+                String[] spinnerList = new String[ar.size()];
+                spinnerList = ar.toArray(spinnerList);
+                ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence> (getApplicationContext(), android.R.layout.simple_spinner_item);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                for (int i=0; i < ar.size(); i++) {
+                    adapter.add(spinnerList[i]);
+                }
+                insertSubjectSpinner.setAdapter(adapter);
+                subjectSpinner.setAdapter(adapter);
+
 
             }
         });
@@ -246,6 +293,7 @@ public class MainActivity extends Activity {
             String answer = answerEditText.getText().toString();
             String subject = insertSubjectSpinner.getSelectedItem().toString();
             Card c = new Card(subject, question, answer);
+
             //TODO: bundle information into the database
             dbAdapt.insertCard(c);
             Toast.makeText(this, "The card has been added!", Toast.LENGTH_SHORT).show();
@@ -255,6 +303,10 @@ public class MainActivity extends Activity {
     }
 
     private void reviewStartButton() {
+
+        System.out.println(cCursor.moveToNext());
+        System.out.println(cCursor.moveToNext());
+        System.out.println(cCursor.moveToNext());
 
         //TODO: If the spinner is empty, then we can not start the new activity, else we go ahead with it
 
@@ -267,6 +319,7 @@ public class MainActivity extends Activity {
             mIntent.putExtra("randomize", randomize);
             mIntent.putExtra("subject", subject);
             startActivity(mIntent);
+
     }
 
 
