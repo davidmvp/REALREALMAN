@@ -10,17 +10,19 @@
         android:layout_width="fill_parent"
         android:layout_height="0dip"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:id="@+id/textView"
+        android:id="@+id/cardTextView"
         android:layout_weight=".7"
-        android:gravity="center" />
+        android:gravity="center"
+        android:textSize="30sp" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:text="     FLIP     "
-        android:id="@+id/flipButton"
-        android:layout_gravity="center_horizontal"
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:text="&lt;-  Tap to flip  ->"
+        android:id="@+id/textView2"
         android:layout_weight=".3"
-        android:textSize="40sp"
-        android:textStyle="bold" />
+        android:gravity="center"
+        android:textSize="50sp" />
+
+
 </LinearLayout>

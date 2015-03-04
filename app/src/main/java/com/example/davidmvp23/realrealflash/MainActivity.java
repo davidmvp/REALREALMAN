@@ -302,7 +302,7 @@ public class MainActivity extends Activity {
         System.out.println(cCursor.moveToNext());
         System.out.println(cCursor.moveToNext());
         System.out.println(cCursor.moveToNext());
-        /*
+
         //TODO: If the spinner is empty, then we can not start the new activity, else we go ahead with it
 
             //Get the subject selected by the spinner
@@ -314,7 +314,7 @@ public class MainActivity extends Activity {
             mIntent.putExtra("randomize", randomize);
             mIntent.putExtra("subject", subject);
             startActivity(mIntent);
-         */
+
     }
 
 
