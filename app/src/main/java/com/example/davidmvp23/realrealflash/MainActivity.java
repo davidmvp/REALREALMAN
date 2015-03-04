@@ -60,6 +60,11 @@ public class MainActivity extends Activity {
     public void populateList()
     {
         cCursor = dbAdapt.getAllCard();
+        cCursor.moveToNext();
+        cCursor.moveToNext();
+        cCursor.moveToNext();
+
+        System.out.println(cCursor.getCount());
 
 
     }
