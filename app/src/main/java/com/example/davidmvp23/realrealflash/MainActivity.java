@@ -61,11 +61,6 @@ public class MainActivity extends Activity {
     public void populateList()
     {
         cCursor = dbAdapt.getAllCard();
-        cCursor.moveToNext();
-        cCursor.moveToNext();
-        cCursor.moveToNext();
-
-        System.out.println(cCursor.getCount());
 
 
     }
@@ -304,9 +299,7 @@ public class MainActivity extends Activity {
 
     private void reviewStartButton() {
 
-        System.out.println(cCursor.moveToNext());
-        System.out.println(cCursor.moveToNext());
-        System.out.println(cCursor.moveToNext());
+
 
         //TODO: If the spinner is empty, then we can not start the new activity, else we go ahead with it
 
