@@ -47,8 +47,17 @@ public class FlashCarddbAdapter {
     public void close() {
         db.close();
     }
-    public boolean removeCourse(long ri) {
-        return db.delete(Card_TABLE, Card_ID+"="+ri, null) > 0;
+    public boolean removeCourse(Card card) {
+        String qu = card.getQuestion();
+        Cursor cursor = db.query(true, Card_TABLE, Card_COLS, Card_question+"="+qu, null, null, null, null, null);
+        if ((cursor.getCount() == 0) || !cursor.moveToFirst()) {
+            throw new SQLException("No course items found for row: " + qu);
+        }
+        // must use column indices to get column values
+        int whatIndex = cursor.getColumnIndex(Card_ID);
+
+
+        return db.delete(Card_TABLE, Card_ID+"="+whatIndex, null) > 0;
     }
     public long insertCard(Card card) {
         // create a new row of values to insert
@@ -63,16 +72,7 @@ public class FlashCarddbAdapter {
     }
 
 
-    public Card getCard(long ri) throws SQLException {
-        Cursor cursor = db.query(true, Card_TABLE, Card_COLS, Card_ID+"="+ri, null, null, null, null, null);
-        if ((cursor.getCount() == 0) || !cursor.moveToFirst()) {
-            throw new SQLException("No course items found for row: " + ri);
-        }
-        // must use column indices to get column values
-        int whatIndex = cursor.getColumnIndex(Card_subject);
-        Card result = new Card(cursor.getString(whatIndex), cursor.getString(2), cursor.getString(3));
-        return result;
-    }
+
 
     public Cursor getAllCard() {
         return db.query(Card_TABLE, Card_COLS, null, null, null, null, null);

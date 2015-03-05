@@ -102,6 +102,8 @@ public class flashcard extends Activity implements GestureDetector.OnGestureList
         return true;
     }
 
+
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -132,6 +134,13 @@ public class flashcard extends Activity implements GestureDetector.OnGestureList
 
     }
 
+
+    private void remove() {
+        long ri = 0;
+        Card c = allcards.get(this.currentIndex);
+
+
+    }
     private void onSwipeRight() {
         Toast.makeText(this, "Swiped right", Toast.LENGTH_SHORT).show();
 
