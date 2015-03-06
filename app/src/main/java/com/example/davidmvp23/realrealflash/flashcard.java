@@ -113,6 +113,9 @@ public class flashcard extends Activity implements GestureDetector.OnGestureList
         if (id == R.id.action_settings) {
             return true;
         }
+        else if (id == R.id.deleteButton) {
+
+        }
 
         return super.onOptionsItemSelected(item);
     }
