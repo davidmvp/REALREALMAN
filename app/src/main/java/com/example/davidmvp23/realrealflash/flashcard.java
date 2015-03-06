@@ -42,13 +42,13 @@ public class flashcard extends Activity implements GestureDetector.OnGestureList
         String subject = mIntent.getStringExtra("subject");
         Boolean randomize = mIntent.getBooleanExtra("randomize", false);
 
-        //TODO: Pull all cards with string subject from the database and put them in an arraylist or something
+        //Pull all cards with string subject from the database and put them in an arraylist or something
         dbAdapt = new FlashCarddbAdapter(this);
         dbAdapt.open();
         allcards = new ArrayList<Card>();
         populateList();
 
-        //TODO: If randomize==true then shuffle the cards in the arraylist
+        //If randomize==true then shuffle the cards in the arraylist
         Random rn = new Random();
 
         for (int i = 0 ; i < allcards.size();i++) {
@@ -58,7 +58,7 @@ public class flashcard extends Activity implements GestureDetector.OnGestureList
             allcards.set(answer, temp);
         }
 
-        //TODO: Get first card in data structure, replace the line below
+        //Get first card in data structure, replace the line below
         Card c = allcards.get(0);
         cardQuestion = c.getQuestion();
         cardAnswer = c.getAnswer();
@@ -114,7 +114,8 @@ public class flashcard extends Activity implements GestureDetector.OnGestureList
             return true;
         }
         else if (id == R.id.deleteButton) {
-
+            //TODO: Delete the card we are currently on. Use currentIndex to figure out which card
+            //we're on and remove from arraylist and database
         }
 
         return super.onOptionsItemSelected(item);
@@ -138,12 +139,12 @@ public class flashcard extends Activity implements GestureDetector.OnGestureList
     private void onSwipeRight() {
         Toast.makeText(this, "Swiped right", Toast.LENGTH_SHORT).show();
 
-        //TODO: If this is the first card, cannot scroll back. Check index of data structure. Maybe use variable to keep track of which card we're on?
+        //If this is the first card, cannot scroll back. Check index of data structure. Maybe use variable to keep track of which card we're on?
         if (currentIndex == 0) {
             Toast.makeText(this, "First card cant scroll back!!!", Toast.LENGTH_SHORT).show();
         }
         else {
-            //TODO: Pull previous card in data structure and put question and answer into the strings
+            //Pull previous card in data structure and put question and answer into the strings
 
             Card c = allcards.get(currentIndex - 1);
             currentIndex--;
@@ -158,11 +159,11 @@ public class flashcard extends Activity implements GestureDetector.OnGestureList
     private void onSwipeLeft() {
         Toast.makeText(this, "swiped left", Toast.LENGTH_SHORT).show();
 
-        //TODO: If this is the last card, cannot move to next card. Same as the above todo
+        //If this is the last card, cannot move to next card
         if (currentIndex == allcards.size() ) {
             Toast.makeText(this, "Last card cant scroll forward!!!", Toast.LENGTH_SHORT).show();
         }
-        //TODO: Pull next card in data structure and put question and answer into the strings
+        //Pull next card in data structure and put question and answer into the strings
         else {
             Card c = allcards.get(currentIndex + 1);
             currentIndex++;
