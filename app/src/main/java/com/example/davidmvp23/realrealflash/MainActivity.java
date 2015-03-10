@@ -292,6 +292,7 @@ public class MainActivity extends Activity {
             //TODO: bundle information into the database
             dbAdapt.insertCard(c);
             Toast.makeText(this, "The card has been added!", Toast.LENGTH_SHORT).show();
+            //hi
 
         }
 
