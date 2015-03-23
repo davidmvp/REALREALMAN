@@ -52,7 +52,7 @@ public class MainActivity extends Activity {
         context = getApplicationContext();
         dbAdapt = new FlashCarddbAdapter(this);
         dbAdapt.open();
-        dbAdapt.insertCard(new Card("intro java", "A+", "HAHA"));
+       // dbAdapt.insertCard(new Card("intro java", "A+", "HAHA"));
         allcards = new ArrayList<Card>();
         populateList();
 
@@ -303,7 +303,9 @@ public class MainActivity extends Activity {
 
 
         //TODO: If the spinner is empty, then we can not start the new activity, else we go ahead with it
-
+            if (dbAdapt.empty() == true) {
+                Toast.makeText(this, "Empty!!", Toast.LENGTH_SHORT).show();
+            }
             //Get the subject selected by the spinner
             String subject = subjectSpinner.getSelectedItem().toString();
             //Get the randomize boolean from the checkbox

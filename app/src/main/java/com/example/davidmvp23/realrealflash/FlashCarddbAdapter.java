@@ -14,6 +14,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.util.Log;
 
+import java.io.File;
+
 public class FlashCarddbAdapter {
 
     private SQLiteDatabase db;
@@ -60,6 +62,14 @@ public class FlashCarddbAdapter {
         **/
         db.delete(Card_TABLE, "card_question = ?", new String[] { qu});
         return true;
+    }
+    public boolean empty() {
+        File f = context.getDatabasePath("db");
+        long dbSize = f.length();
+        if (dbSize == 0) {
+            return true;
+        }
+        return false;
     }
     public long insertCard(Card card) {
         // create a new row of values to insert
