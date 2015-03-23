@@ -123,10 +123,13 @@ public class flashcard extends Activity implements GestureDetector.OnGestureList
             if (allcards.size()== 0) {
                 //TODO: show text this is the last card
             }
-            else if (allcards.size() == this.currentIndex) {
+            else if ( this.currentIndex == 0) {
+                this.currentIndex--;
                 this.onSwipeLeft();
+
             }
             else {
+
                 this.onSwipeRight();
             }
 
