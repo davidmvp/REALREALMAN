@@ -47,17 +47,19 @@ public class FlashCarddbAdapter {
     public void close() {
         db.close();
     }
-    public boolean removeCourse(Card card) {
+    public boolean removeCard(Card card) {
         String qu = card.getQuestion();
-        Cursor cursor = db.query(true, Card_TABLE, Card_COLS, Card_question+"="+qu, null, null, null, null, null);
+        System.out.println("QU is " + qu);
+        /**Cursor cursor = db.query(true, Card_TABLE, Card_COLS, Card_question+"="+1, null, null, null, null, null);
         if ((cursor.getCount() == 0) || !cursor.moveToFirst()) {
             throw new SQLException("No course items found for row: " + qu);
         }
         // must use column indices to get column values
-        int whatIndex = cursor.getColumnIndex(Card_ID);
-
-
-        return db.delete(Card_TABLE, Card_ID+"="+whatIndex, null) > 0;
+        int whatIndex = cursor.getColumnIndex(Card_question);
+        System.out.println(whatIndex);
+        **/
+        db.delete(Card_TABLE, "card_question = ?", new String[] { qu});
+        return true;
     }
     public long insertCard(Card card) {
         // create a new row of values to insert
