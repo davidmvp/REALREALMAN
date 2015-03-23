@@ -291,6 +291,7 @@ public class MainActivity extends Activity {
 
             //TODO: bundle information into the database
             dbAdapt.insertCard(c);
+
             Toast.makeText(this, "The card has been added!", Toast.LENGTH_SHORT).show();
             //hi
 
@@ -298,16 +299,19 @@ public class MainActivity extends Activity {
 
     }
 
+
     private void reviewStartButton() {
 
 
 
         //TODO: If the spinner is empty, then we can not start the new activity, else we go ahead with it
-            if (dbAdapt.empty() == true) {
-                Toast.makeText(this, "Empty!!", Toast.LENGTH_SHORT).show();
-            }
+
+
             //Get the subject selected by the spinner
             String subject = subjectSpinner.getSelectedItem().toString();
+
+
+
             //Get the randomize boolean from the checkbox
             Boolean randomize = randomizeCheckBox.isChecked();
 

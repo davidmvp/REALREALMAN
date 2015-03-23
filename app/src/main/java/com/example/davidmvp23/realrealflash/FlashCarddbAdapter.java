@@ -64,12 +64,19 @@ public class FlashCarddbAdapter {
         return true;
     }
     public boolean empty() {
-        File f = context.getDatabasePath("db");
-        long dbSize = f.length();
-        if (dbSize == 0) {
+        Cursor mCursor = db.query(Card_TABLE, Card_COLS, null, null, null, null, null);
+
+
+        if (mCursor.moveToFirst())
+        {
+            System.out.println("ha");
+            return false;
+
+        } else
+        {
+            System.out.println("ha12");
             return true;
         }
-        return false;
     }
     public long insertCard(Card card) {
         // create a new row of values to insert

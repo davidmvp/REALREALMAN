@@ -46,26 +46,30 @@ public class flashcard extends Activity implements GestureDetector.OnGestureList
         dbAdapt = new FlashCarddbAdapter(this);
         dbAdapt.open();
         allcards = new ArrayList<Card>();
-        populateList();
-
-        //If randomize==true then shuffle the cards in the arraylist
-        Random rn = new Random();
-
-        for (int i = 0 ; i < allcards.size();i++) {
-            int answer = rn.nextInt(allcards.size()-i) + i;
-            Card temp = allcards.get(i);
-            allcards.set(i, allcards.get(answer));
-            allcards.set(answer, temp);
+        populateList(subject);
+        System.out.println("all cards " + allcards.size());
+        if (allcards.size() == 0) {
+            cardView.setText("There are no cards for this subject. Please go back and add more cards");
         }
+        else {
+            //If randomize==true then shuffle the cards in the arraylist
+            Random rn = new Random();
+            if (randomize) {
+                for (int i = 0; i < allcards.size(); i++) {
+                    int answer = rn.nextInt(allcards.size() - i) + i;
+                    Card temp = allcards.get(i);
+                    allcards.set(i, allcards.get(answer));
+                    allcards.set(answer, temp);
+                }
+            }
+            //Get first card in data structure, replace the line below
+            Card c = allcards.get(0);
+            cardQuestion = c.getQuestion();
+            cardAnswer = c.getAnswer();
 
-        //Get first card in data structure, replace the line below
-        Card c = allcards.get(0);
-        cardQuestion = c.getQuestion();
-        cardAnswer = c.getAnswer();
-
-        cardView.setText(cardQuestion);
-        cardFlipped = false;
-
+            cardView.setText(cardQuestion);
+            cardFlipped = false;
+        }
     }
 
     @Override
@@ -74,23 +78,25 @@ public class flashcard extends Activity implements GestureDetector.OnGestureList
 
     }
 
-    public void populateList()
+    public void populateList(String subject)
     {
         cCursor = dbAdapt.getAllCard();
-        update();
+        update(subject);
 
 
 
     }
 
-    public void update() {
+    public void update(String subject) {
 
         allcards.clear();
 
         if (cCursor.moveToFirst())
             do {
                 Card result = new Card(cCursor.getString(1), cCursor.getString(2), cCursor.getString(3));
-                allcards.add(0, result);
+                if (result.getCategory().equals(subject)) {
+                    allcards.add(0, result);
+                }
 
             } while (cCursor.moveToNext());
     }
@@ -144,6 +150,9 @@ public class flashcard extends Activity implements GestureDetector.OnGestureList
 
 
     private void singleTap() {
+        if (allcards.size() == 0) {
+            return;
+        }
         Toast.makeText(this, "Tapped", Toast.LENGTH_SHORT).show();
 
         if(cardFlipped) {
@@ -165,12 +174,17 @@ public class flashcard extends Activity implements GestureDetector.OnGestureList
 
     }
     private void onSwipeRight() {
+        if (allcards.size() == 0) {
+            return;
+        }
         Toast.makeText(this, "Swiped right", Toast.LENGTH_SHORT).show();
-
+        System.out.println("Current index" + currentIndex);
+        System.out.println("size " + allcards.size());
         //If this is the first card, cannot scroll back. Check index of data structure. Maybe use variable to keep track of which card we're on?
         if (currentIndex == 0) {
             Toast.makeText(this, "First card cant scroll back!!!", Toast.LENGTH_SHORT).show();
         }
+
         else {
             //Pull previous card in data structure and put question and answer into the strings
 
@@ -185,11 +199,16 @@ public class flashcard extends Activity implements GestureDetector.OnGestureList
     }
 
     private void onSwipeLeft() {
+        if (allcards.size() == 0) {
+            return;
+        }
         Toast.makeText(this, "swiped left", Toast.LENGTH_SHORT).show();
-
+        System.out.println("Current index" + currentIndex);
+        System.out.println("size " + allcards.size());
         //If this is the last card, cannot move to next card
-        if (currentIndex == allcards.size() ) {
+        if (currentIndex == allcards.size()-1 ) {
             Toast.makeText(this, "Last card cant scroll forward!!!", Toast.LENGTH_SHORT).show();
+
         }
         //Pull next card in data structure and put question and answer into the strings
         else {
