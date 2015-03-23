@@ -120,6 +120,18 @@ public class flashcard extends Activity implements GestureDetector.OnGestureList
             System.out.println("LOL");
             Card c = allcards.remove(this.currentIndex);
             dbAdapt.removeCard(c);
+            if (allcards.size()== 0) {
+                //TODO: show text this is the last card
+            }
+            else if (allcards.size() == this.currentIndex) {
+                this.onSwipeLeft();
+            }
+            else {
+                this.onSwipeRight();
+            }
+
+
+
             //we're on and remove from arraylist and database
         }
 
