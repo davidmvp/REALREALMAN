@@ -129,13 +129,6 @@ public class MainActivity extends Activity {
         subjectSpinner.setAdapter(adapter);
 
 
-
-        //TODO: Do we need this? Same as below- check the listener
-        /*
-        //Set checkbox listener to subject checkbox
-        subjectSpinner.setOnClickListener(cbListener);
-        */
-
         //Set start button listener
         startButton.setOnClickListener(reviewTabListener);
     }
@@ -239,7 +232,6 @@ public class MainActivity extends Activity {
                 editor.putInt("number", num);
                 editor.putString("subject", str);
                 editor.commit();
-                //TODO: Need to notify spinner adapter that the data set has changed / repopulate the spinner
 
 
                 //TODO: Populate spinner from the database DONE
@@ -289,7 +281,7 @@ public class MainActivity extends Activity {
             String subject = insertSubjectSpinner.getSelectedItem().toString();
             Card c = new Card(subject, question, answer);
 
-            //TODO: bundle information into the database
+            //TODO: bundle information into the database DONE
             dbAdapt.insertCard(c);
 
             Toast.makeText(this, "The card has been added!", Toast.LENGTH_SHORT).show();
@@ -308,6 +300,7 @@ public class MainActivity extends Activity {
 
 
             //Get the subject selected by the spinner
+
             String subject = subjectSpinner.getSelectedItem().toString();
 
 
