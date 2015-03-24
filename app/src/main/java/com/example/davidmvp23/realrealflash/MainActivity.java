@@ -306,7 +306,10 @@ public class MainActivity extends Activity {
 
         //TODO: If the spinner is empty, then we can not start the new activity, else we go ahead with it
 
-
+            if (subjectSpinner.getSelectedItem()  == null) {
+                Toast.makeText(this, "There are no subjects, create one!", Toast.LENGTH_SHORT).show();
+                return;
+            }
             //Get the subject selected by the spinner
             String subject = subjectSpinner.getSelectedItem().toString();
 
