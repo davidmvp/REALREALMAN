@@ -124,6 +124,8 @@ public class flashcard extends Activity implements GestureDetector.OnGestureList
         else if (id == R.id.deleteButton) {
             //TODO: Delete the card we are currently on. Use currentIndex to figure out which card
             //System.out.println("LOL");
+            if(allcards.size()==0)
+                return true;
             Card c = allcards.remove(this.currentIndex);
             dbAdapt.removeCard(c);
             if (allcards.size()== 0) {
